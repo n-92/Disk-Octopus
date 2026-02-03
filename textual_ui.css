@@ -1,0 +1,347 @@
+/* Copilot Disk Visualizer - Textual CSS Styling */
+
+Screen {
+    background: $surface;
+    color: $text;
+}
+
+Header {
+    background: $boost;
+    color: $text;
+    height: 1;
+    dock: top;
+}
+
+Footer {
+    background: $boost;
+    color: $text;
+    height: 1;
+    dock: bottom;
+}
+
+#status-bar {
+    height: 1;
+    dock: bottom;
+    background: $panel;
+    padding: 0 1;
+}
+
+#status-message {
+    width: 40%;
+    color: $accent;
+}
+
+#main-content {
+    padding: 0;
+    margin: 0;
+    layout: horizontal;
+}
+
+
+#progress-bar {
+    width: 1fr;
+    height: 1;
+}
+
+#left-panel {
+    width: 45fr;
+    background: $panel;
+}
+
+#right-panel {
+    width: 55fr;
+    background: $panel;
+    layout: vertical;
+    padding-right: 0;
+}
+
+#top-row {
+    height: 50%;
+    width: 1fr;
+    layout: horizontal;
+}
+
+#bottom-row {
+    height: 50%;
+    width: 1fr;
+    layout: horizontal;
+}
+
+#stats-section {
+    width: 50%;
+    height: 1fr;
+    background: $panel;
+    padding-right: 0;
+}
+
+#analysis-section {
+    width: 50%;
+    height: 1fr;
+    background: $panel;
+    padding-right: 0;
+    margin-right: 0;
+    layout: vertical;
+}
+
+#paths-section {
+    width: 50%;
+    height: 1fr;
+    background: $panel;
+    padding-right: 0;
+}
+
+#deep-analysis-section {
+    width: 50%;
+    height: 1fr;
+    background: $panel;
+    padding-right: 0;
+    margin-right: 0;
+    layout: vertical;
+}
+
+#analysis-scroll {
+    height: 1fr;
+    width: 1fr;
+    margin: 0 1;
+    padding: 1;
+}
+
+#deep-analysis-scroll {
+    height: 1fr;
+    width: 1fr;
+    margin: 0 1;
+    padding: 1;
+}
+
+#analysis-panel {
+    color: $accent;
+    width: 100%;
+    height: auto;
+    background: $panel;
+    padding: 1;
+}
+
+
+#tree-header {
+    color: $success;
+    height: 1;
+    dock: top;
+    background: $boost;
+}
+
+#stats-header {
+    color: $accent;
+    height: 1;
+    dock: top;
+    background: $boost;
+}
+
+#analysis-header {
+    color: $warning;
+    height: 1;
+    dock: top;
+    background: $boost;
+}
+
+#paths-header {
+    color: $warning;
+    height: 1;
+    dock: top;
+    background: $boost;
+}
+
+#deep-analysis-header {
+    color: $success;
+    height: 1;
+    dock: top;
+    background: $boost;
+}
+
+#deep-analysis-panel {
+    color: $text;
+    width: 100%;
+    height: auto;
+    background: $panel;
+    padding: 1;
+}
+
+Tree {
+    background: $surface;
+    margin: 0 1;
+    padding: 0 1;
+}
+
+Tree > .tree-node {
+    margin: 0;
+}
+
+Tree > .tree-node .tree-node-label {
+    color: $text;
+}
+
+Tree > .tree-node:hover .tree-node-label {
+    background: $boost;
+    color: $text-muted;
+}
+
+Tree > .tree-node.-expanded .tree-node-label {
+    color: $accent;
+}
+
+DataTable {
+    background: $surface;
+    margin: 0 1;
+    padding: 0 1;
+    height: 1fr;
+}
+
+#paths-table {
+    background: $surface;
+    margin: 0 1;
+    padding: 0 1;
+    height: 1fr;
+}
+
+DataTable > .datatable-header {
+    background: $boost;
+    color: $accent;
+}
+
+DataTable > .datatable-row {
+    background: $surface;
+    color: $text;
+}
+
+DataTable > .datatable-row.-selected {
+    background: $boost;
+    color: $accent;
+}
+
+#analysis-scroll {
+    height: 1fr;
+    margin: 0 1;
+    padding: 1;
+}
+
+#analysis-panel {
+    color: $accent;
+    width: 100%;
+    height: auto;
+}
+
+#octopus-art {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    color: $accent;
+}
+
+#title-panel {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    color: $accent;
+    background: $panel;
+    padding: 1 2;
+    margin: 1;
+}
+
+#intro-panel {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    color: $accent;
+    background: $panel;
+    padding: 1 2;
+    margin: 1;
+}
+
+#drive-label {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    color: $text;
+    padding: 1 2;
+    margin: 1;
+}
+
+Button {
+    margin: 1 1;
+    width: auto;
+    background: $primary;
+    color: $text;
+    border: none;
+}
+
+Button:hover {
+    background: $primary;
+    color: $text;
+}
+
+Button:focus {
+    background: $primary;
+    color: $text;
+}
+
+#buttons-container {
+    layout: horizontal;
+    width: 1fr;
+    height: auto;
+    align: center middle;
+}
+
+Label {
+    color: $text;
+}
+
+/* Scrollbar styling - Purple theme */
+ScrollBar {
+    background: $surface;
+    border: none;
+}
+
+ScrollBar > .scrollbar-track-vertical,
+ScrollBar > .scrollbar-track-horizontal {
+    background: $surface;
+}
+
+ScrollBar > .scrollbar-thumb-vertical,
+ScrollBar > .scrollbar-thumb-horizontal {
+    background: $warning;
+}
+
+ScrollBar > .scrollbar-thumb-vertical:hover,
+ScrollBar > .scrollbar-thumb-horizontal:hover {
+    background: $warning 80%;
+}
+
+#analysis-panel {
+    color: $accent;
+    width: 100%;
+}
+
+/* Color coding for file sizes and security levels */
+.large-file {
+    color: $error;
+}
+
+.medium-file {
+    color: $warning;
+}
+
+.small-file {
+    color: $success;
+}
+
+.security-critical {
+    color: $error;
+    background: $boost;
+}
+
+.security-warning {
+    color: $warning;
+}
+
+.security-safe {
+    color: $success;
+}

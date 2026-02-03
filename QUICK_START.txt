@@ -1,0 +1,114 @@
+================================================================================
+🐙 DISK OCTOPUS - QUICK START GUIDE
+================================================================================
+
+STEP 1: CHECK PYTHON
+====================
+Open terminal/command prompt and run:
+  python --version
+
+You need Python 3.10 or higher.
+If Python is not installed, download from: https://www.python.org/downloads/
+
+STEP 2: INSTALL DEPENDENCIES
+============================
+In the project directory, run:
+  pip install -r requirements.txt
+
+Wait for all packages to install (takes 1-2 minutes).
+
+STEP 3: VERIFY INSTALLATION
+===========================
+Run this to confirm everything is installed:
+  python -c "import textual; import rich; print('✓ Ready to go!')"
+
+STEP 4: RUN THE APPLICATION
+===========================
+Simply run:
+  python main.py
+
+The application will launch with a drive selection screen.
+
+================================================================================
+PLATFORM-SPECIFIC NOTES
+================================================================================
+
+WINDOWS:
+- Use PowerShell (not Command Prompt) for best results
+- To open PowerShell: Press WIN+X, select "Windows PowerShell"
+- Or use Windows Terminal: https://www.microsoft.com/en-us/p/windows-terminal/
+
+macOS:
+- If "python" doesn't work, try "python3"
+- Open Terminal and run: python3 main.py
+
+LINUX:
+- Usually python3 is required: python3 main.py
+- Some distributions require explicit python3 installation
+
+================================================================================
+COMMON ISSUES & QUICK FIXES
+================================================================================
+
+Issue: "python: command not found"
+Fix:   Try "python3 main.py" or reinstall Python
+
+Issue: "pip install fails"
+Fix:   Run: python -m pip install --upgrade pip
+       Then: pip install -r requirements.txt
+
+Issue: "Permission denied"
+Fix:   On Windows: Run PowerShell as Administrator
+       On Mac/Linux: Try: python3 -m venv venv
+                         source venv/bin/activate
+                         pip install -r requirements.txt
+
+Issue: "Application crashes or won't start"
+Fix:   Run: pip install -r requirements.txt --force-reinstall
+
+Issue: "ModuleNotFoundError"
+Fix:   Make sure you're in the project directory
+       Run: pip install -r requirements.txt
+
+Issue: "Terminal too small" (UI display issues)
+Fix:   Maximize your terminal window
+       Use Windows Terminal, iTerm2, or GNOME Terminal for better support
+
+================================================================================
+OPTIONAL: COPILOT INTEGRATION
+================================================================================
+
+For enhanced AI analysis, install GitHub Copilot CLI:
+  gh extension install github/gh-copilot
+
+This requires:
+- GitHub CLI (gh) installed
+- GitHub account with Copilot access
+
+The app works perfectly without Copilot. If not installed, Disk Octopus
+will automatically use intelligent pattern-based analysis.
+
+================================================================================
+GETTING STARTED IN THE APP
+================================================================================
+
+1. Select a drive to analyze (C:, D:, etc.)
+2. Press 'h' at any time for help
+3. Use arrow keys to navigate
+4. Press 'd' to perform deep file analysis
+5. Press 'q' to quit
+
+Full documentation: See README.md
+
+================================================================================
+NEED HELP?
+================================================================================
+
+✓ Press 'h' in the app for built-in help
+✓ Check README.md for detailed documentation
+✓ See troubleshooting section in README.md
+✓ Open an issue on GitHub
+
+================================================================================
+Enjoy! 🐙
+================================================================================
