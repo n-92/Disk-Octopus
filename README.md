@@ -27,13 +27,13 @@ The comprehensive disk analysis interface showing directory tree, file statistic
 Real-time statistics showing file type distribution, storage consumption, and detailed breakdowns.
 ![File Statistics](file_statistics_screen.png)
 
-### Deep Analysis Results
-Intelligent AI-powered analysis of selected files with detailed insights and categorization.
-![Deep Analysis Screen](deep_analysis_screen.png)
-
 ### Copilot Analysis Panel
 Enhanced analysis powered by GitHub Copilot integration with AI commentary and pattern detection.
 ![Copilot Analysis](copilot_analysis_screen.png)
+
+### Deep Analysis Results
+Intelligent AI-powered analysis of selected files with detailed insights and categorization.
+![Deep Analysis Screen](deep_analysis_screen.png)
 
 ### File Paths Display
 Comprehensive file path listing with size information and file organization details.
