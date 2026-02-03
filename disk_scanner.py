@@ -23,13 +23,25 @@ class FileNode:
     parent: Optional['FileNode'] = None
     extension_stats: dict = field(default_factory=dict)  # {ext: {count, size}}
     is_scanned: bool = False  # Track if this directory has been fully scanned
+    _total_size_cache: int = field(default=-1)  # Cache for total_size
+    _extension_stats_cache: dict = field(default_factory=dict)  # Cache for extension stats
+    _stats_dirty: bool = field(default=True)  # Whether cache needs rebuild
     
     @property
     def total_size(self) -> int:
-        """Calculate total size including children."""
-        if self.is_dir:
-            return sum(child.total_size for child in self.children)
-        return self.size
+        """Calculate total size including children. Cached for performance."""
+        if self._total_size_cache == -1:
+            if self.is_dir:
+                self._total_size_cache = sum(child.total_size for child in self.children)
+            else:
+                self._total_size_cache = self.size
+        return self._total_size_cache
+    
+    def invalidate_size_cache(self):
+        """Invalidate size cache and propagate to parent."""
+        self._total_size_cache = -1
+        if self.parent:
+            self.parent.invalidate_size_cache()
     
     @property
     def file_count(self) -> int:
@@ -52,10 +64,18 @@ class FileNode:
         return f"{size:.1f} PB"
     
     def get_extension_stats(self) -> dict:
-        """Get file extension statistics for this directory and subdirs."""
-        stats = {}
-        self._collect_extension_stats(stats)
-        return stats
+        """Get file extension statistics for this directory and subdirs. Cached for performance."""
+        if self._stats_dirty:
+            self._extension_stats_cache = {}
+            self._collect_extension_stats(self._extension_stats_cache)
+            self._stats_dirty = False
+        return self._extension_stats_cache
+    
+    def invalidate_stats_cache(self):
+        """Invalidate stats cache and propagate to parent."""
+        self._stats_dirty = True
+        if self.parent:
+            self.parent.invalidate_stats_cache()
     
     def _collect_extension_stats(self, stats: dict):
         """Recursively collect extension statistics."""
@@ -167,3 +187,5 @@ class DiskScanner:
         
         # Sort children by size
         node.children.sort(key=lambda x: x.total_size, reverse=True)
+        # Mark that caches are now valid (we just built this subtree)
+        node._stats_dirty = False

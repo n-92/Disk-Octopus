@@ -5,12 +5,17 @@ Copilot Integration - Use locally installed Copilot binary
 import os
 import subprocess
 import json
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 from typing import List, Optional, Dict
 from pathlib import Path
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
 console = Console()
+
+# Process pool for subprocess calls (reuse connections)
+_process_pool = ThreadPoolExecutor(max_workers=2)
 
 
 class CopilotBinaryAnalyzer:
@@ -20,6 +25,7 @@ class CopilotBinaryAnalyzer:
         """Initialize analyzer and detect copilot binary."""
         self.copilot_path = self._detect_copilot_binary()
         self.cache = {}
+        self.process_pool = _process_pool
         
         if not self.copilot_path:
             self.available = False

@@ -14,6 +14,7 @@ import os
 from disk_scanner import DiskScanner, FileNode
 from file_type_analyzer import FileTypeAnalyzer
 from copilot_analyzer import CopilotBinaryAnalyzer
+from cache_manager import get_cache
 
 
 class DiskVisualizerApp(Screen):
@@ -36,6 +37,7 @@ class DiskVisualizerApp(Screen):
         self.selected_node = None
         self.file_type_analyzer = FileTypeAnalyzer()
         self.copilot_analyzer = CopilotBinaryAnalyzer()
+        self.cache = get_cache()
         self.scanning = False
         self.scan_progress = 0
         self.scan_total = 100
@@ -134,7 +136,7 @@ class DiskVisualizerApp(Screen):
         tree.root.label = root_label
     
     async def start_scan(self) -> None:
-        """Start disk scan - load first level folders only."""
+        """Start disk scan - load first level folders only. Uses cache if available."""
         self.scanning = True
         self._scan_count = 0
         
@@ -142,7 +144,33 @@ class DiskVisualizerApp(Screen):
             tree = self.query_one("#file-tree", Tree)
             progress_bar = self.query_one("#progress-bar", ProgressBar)
             
-            # Show scanning status IMMEDIATELY
+            # Try to load from cache first
+            self.title = f"Disk Octopus | Checking cache..."
+            progress_bar.progress = 25
+            self.refresh()
+            await asyncio.sleep(0)
+            
+            cached_node = await asyncio.to_thread(
+                self.cache.load_scan, self.drive_path
+            )
+            
+            if cached_node:
+                # Use cached data!
+                self.title = f"Disk Octopus | Loaded from cache..."
+                progress_bar.progress = 50
+                self.refresh()
+                await asyncio.sleep(0)
+                
+                self.root_node = cached_node
+                await self._populate_tree_from_node(tree.root, cached_node)
+                
+                self.scanning = False
+                progress_bar.progress = 100
+                self.title = f"Disk Octopus | {self.drive_path} | Ready (cached)"
+                self.refresh()
+                return
+            
+            # No cache, do full scan
             self.title = f"Disk Octopus | Loading first level..."
             progress_bar.progress = 0
             tree.clear()
@@ -176,6 +204,12 @@ class DiskVisualizerApp(Screen):
                 # Expand the root node to show children
                 root.expand()
                 self.refresh()
+            
+            # Save to cache for next time
+            if self.root_node:
+                await asyncio.to_thread(
+                    self.cache.save_scan, self.drive_path, self.root_node
+                )
             
             # Complete
             self.scanning = False
